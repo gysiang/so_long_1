@@ -35,25 +35,6 @@ void	open_map(const char *filename, char **array)
 	close(fd);
 }
 
-void	*load_image(char c, char *path, void *mlx_ptr)
-{
-	char	*image_path;
-	int		height;
-	int		width;
-
-	if (c == '0')
-		image_path = FLOOR_XPM;
-	if (c == '1')
-		image_path = BORDER_XPM;
-	if (c == 'C')
-		image_path = COIN_XPM;
-	if (c == 'E')
-		image_path = EXIT_XPM;
-	if (c == 'P')
-		image_path = CHAR_XPM;
-	return (mlx_xpm_file_to_image(mlx_ptr, image_path, &width, &height));
-}
-
 int	checkfiletype(const char *filename)
 {
 	size_t	len = ft_strlen(filename);
