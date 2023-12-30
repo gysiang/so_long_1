@@ -23,7 +23,7 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "mlx.h"
-//# include "get_next_line.h"
+# include "get_next_line.h"
 
 # define TILE_SIZE			50
 # define MAX_ROWS			10

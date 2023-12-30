@@ -19,7 +19,7 @@ INCLUDES 		= -I$(INCLUDES_DIR) \
           			-I$(LIBFT_DIR) \
            			-I$(PRINTF_DIR) \
           			-I$(MLX_DIR) \
-         			-I$(GNL_DIR)
+         			-I$(SRC_DIR)/$(GNL_DIR)
 # Library files
 
 LIBS			= -L$(LIBFT_DIR) -lft \
