@@ -32,8 +32,9 @@ LIBS			= -L$(LIBFT_DIR) -lft \
 SRC_FILES 		= $(addprefix $(SRC_DIR)/, \
     				main.c \
     				map_utils.c \
-    				so_long.c) \
-    				gnl/get_next_line.c
+    				load_images.c \
+    				so_long.c \
+    				gnl/get_next_line.c)
 
 # Object files
 OBJS			= $(SRC_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

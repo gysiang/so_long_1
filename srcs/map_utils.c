@@ -12,7 +12,6 @@
 
 #include "so_long.h"
 
-void	*load_image(char c, void *mlx_ptr);
 
 void	open_map(const char *filename, char **array)
 {
@@ -121,6 +120,7 @@ void	render_map(char **map, void *mlx_ptr, void *win_ptr)
 	int	y = 0;
 	void	*image;
 
+	printf("In render map");
 	while (map[y] != NULL)
 	{
 		x = 0;

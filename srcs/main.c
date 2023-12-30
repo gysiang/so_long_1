@@ -12,9 +12,6 @@
 
 #include "so_long.h"
 
-
-int	on_keypress(KeySym keysym, t_data *data);
-
 void	init_game(t_data *data)
 {
 	data->mlx_ptr = mlx_init();

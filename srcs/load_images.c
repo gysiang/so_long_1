@@ -35,14 +35,17 @@ void	*load_image(char c, void *mlx_ptr)
 int	on_keypress(KeySym keysym, t_data *data)
 {
 	char	*key;
-	void	*image;
-	void	*empty_tile;
+	//void	*image;
+	//void	*empty_tile;
 	
-	empty_tile = load_image(FLOOR_XPM, data->mlx_ptr);
+	//empty_tile = load_image(FLOOR_XPM, data->mlx_ptr);
 	key = XKeysymToString(keysym);
 	printf("Pressed key: %s\n", key);
 	if (keysym == XK_Escape)
+	{
 		on_destroy(data);
+	}
+	/**
 	else if (keysym == XK_Left)
 	{
 		image = load_image(CHAR_XPM, data->mlx_ptr);
@@ -53,7 +56,7 @@ int	on_keypress(KeySym keysym, t_data *data)
 	else if (keysym == XK_Right)
 	{
 		image = load_image(CHAR_XPM, data->mlx_ptr);
-		data->--player_x++;
+		data->player_x++;
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image,
 				data->player_x, data->player_y);
 	}
@@ -68,20 +71,19 @@ int	on_keypress(KeySym keysym, t_data *data)
 	{
 		image = load_image(CHAR_XPM, data->mlx_ptr);
 		data->player_y--;
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image,
 				data->player_x, data->player_y);
 	}
-	render_map(map, data->mlx_ptr, data->win_ptr);
+	render_map(data->map, data->mlx_ptr, data->win_ptr);
+	**/
 	return (0);
 }
 
 int	on_destroy(t_data *data)
 {
-	if (data->win_ptr)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	if (data->mlx_ptr)
-		mlx_destroy_display(data->mlx_ptr);
-	free(data);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
 	exit(0);
 	return (0);
 }
