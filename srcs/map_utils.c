@@ -114,22 +114,25 @@ int	checkValidMap(t_data *data)
 	return (0);
 }
 
-void	render_map(char **map, void *mlx_ptr, void *win_ptr)
+void	render_map(t_data *data)
 {
 	int	x;
 	int	y = 0;
 	void	*image;
 
-	printf("In render map");
-	while (map[y] != NULL)
+	while (data->map[y] != NULL)
 	{
 		x = 0;
-		while (map[y][x] != '\n')
+		while (data->map[y][x] != '\n')
 		{
-			image = load_image(map[y][x], mlx_ptr);
+			image = load_image(data->map[y][x], data->mlx_ptr);
+			if (data->map[y][x] == 'P')
+			{
+				data->char_image = image;
+			}
 			if (image != NULL)
 			{
-				mlx_put_image_to_window(mlx_ptr, win_ptr, image, 
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image, 
 					x * TILE_SIZE, y * TILE_SIZE);
 			}
 			x++;

@@ -31,51 +31,59 @@ void	*load_image(char c, void *mlx_ptr)
 	return (mlx_xpm_file_to_image(mlx_ptr, image_path, &width, &height));
 }
 
+void	redraw_character(t_data *data, int new_x, int new_y) 
+{
+    // Assuming you have an image pointer for the character loaded using mlx_xpm_file_to_image
+    void *character_image;
+    int	width;
+    int	height;
+    
+    character_image = mlx_xpm_file_to_image(data->mlx_ptr, CHAR_XPM, &width, &height);
+    // Clear the previous position of the character
+    if (data->char_image != NULL) 
+        mlx_destroy_image(data->mlx_ptr, data->char_image);
+    // Draw the character at the new position
+    /**
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, character_image, 
+    	new_x * TILE_SIZE, new_y * TILE_SIZE);
+    **/
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, character_image, 
+    	(new_x * TILE_SIZE), (new_y * TILE_SIZE));
+    // Store the new character image pointer for future destruction
+    data->char_image = character_image;
+}
+
 
 int	on_keypress(KeySym keysym, t_data *data)
 {
 	char	*key;
-	//void	*image;
-	//void	*empty_tile;
-	
-	//empty_tile = load_image(FLOOR_XPM, data->mlx_ptr);
+
 	key = XKeysymToString(keysym);
 	printf("Pressed key: %s\n", key);
 	if (keysym == XK_Escape)
-	{
 		on_destroy(data);
-	}
 	/**
 	else if (keysym == XK_Left)
 	{
-		image = load_image(CHAR_XPM, data->mlx_ptr);
-		data->map[data->player_x][data->player_y] = '0';
-		data->player_x--;
-		data->map[data->player_x][data->player_y] = 'P';
+		data->player_x -= 1;
+		redraw_character(data, data->player_x, data->player_y);
 	}
 	else if (keysym == XK_Right)
 	{
-		image = load_image(CHAR_XPM, data->mlx_ptr);
-		data->player_x++;
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image,
-				data->player_x, data->player_y);
+		data->player_x += 1;
+		redraw_character(data, data->player_x, data->player_y);
 	}
+	**/
 	else if (keysym == XK_Up)
 	{
-		image = load_image(CHAR_XPM, data->mlx_ptr);
-		data->player_y++;
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image,
-				data->player_x, data->player_y);
+		data->player_y += 1;
+		redraw_character(data, data->player_x, data->player_y);
 	}
 	else if (keysym == XK_Down)
 	{
-		image = load_image(CHAR_XPM, data->mlx_ptr);
-		data->player_y--;
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image,
-				data->player_x, data->player_y);
+		data->player_y -= 1;
+		redraw_character(data, data->player_x, data->player_y);
 	}
-	render_map(data->map, data->mlx_ptr, data->win_ptr);
-	**/
 	return (0);
 }
 

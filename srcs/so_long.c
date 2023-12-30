@@ -43,6 +43,7 @@ t_data	*init_t_data()
 	}
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
+	data->char_image = NULL;
 	data->coins = 0;
 	data->exit_x = 0;
 	data->exit_y = 0;

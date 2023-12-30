@@ -38,6 +38,7 @@ typedef	struct	s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*char_image;
 	char	**map;
 	int	width;
 	int	height;
@@ -56,8 +57,9 @@ int	checkBorder(char **map);
 int	checkRectangle(char **map);
 int	checkValidMap(t_data *data);
 void	open_map(const char *filename, char **array);
-void	render_map(char **map, void *mlx_ptr, void *win_ptr);
+void	render_map(t_data *data);
 void	*load_image(char c, void *mlx_ptr);
+void	redraw_character(t_data *data, int new_x, int new_y);
 t_data	*init_t_data();
 
 #endif

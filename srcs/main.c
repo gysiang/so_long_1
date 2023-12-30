@@ -18,7 +18,7 @@ void	init_game(t_data *data)
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 1920, 1080, "This is a window");
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
 	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask, &on_destroy, &data);
-	render_map(data->map, data->mlx_ptr, data->win_ptr);
+	render_map(data);
 	mlx_loop(data->mlx_ptr);
 }
 
