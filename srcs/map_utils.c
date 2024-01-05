@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyong-si <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2023/12/20 19:03:16 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:27:47 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	open_map(const char *filename, char **array)
 {
@@ -79,19 +78,20 @@ int	checkRectangle(char **map)
 int	checkValidMap(t_data *data)
 {
 	int	x;
-	int y = 0;
+	int y;
 	int	player;
 	int	map_exit;
 
 	map_exit = 0;
 	player = 0;
+	y = 0;
 	while (data->map[y] != NULL)
 	{
 		x = 0;
 		while (data->map[y][x] != '\n')
 		{
 			if (data->map[y][x] == 'C')
-				data->coins += 1;
+				data->coins++;
 			if (data->map[y][x] == 'E')
 			{
 				map_exit++;
@@ -101,15 +101,18 @@ int	checkValidMap(t_data *data)
 			if (data->map[y][x] == 'P')
 			{
 				player++;
-				data->player_x = x;
-				data->player_y = y;
+				data->curr_x = x;
+				data->curr_y = y;
 			}
 			x++;
 		}
 		y++;
 	}
-	if (player == 1 && map_exit == 1 && data->coins >= 1 
-			&& checkRectangle(data->map) == 1 && checkBorder(data->map) == 1)
+	data->map_width = x * TILE_SIZE;
+	data->map_height = y * TILE_SIZE;
+	if (player == 1 && map_exit == 1 && data->coins >= 1
+			&& checkRectangle(data->map) == 1
+			&& checkBorder(data->map) == 1)
 		return (1);
 	return (0);
 }
@@ -127,12 +130,10 @@ void	render_map(t_data *data)
 		{
 			image = load_image(data->map[y][x], data->mlx_ptr);
 			if (data->map[y][x] == 'P')
-			{
 				data->char_image = image;
-			}
 			if (image != NULL)
 			{
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image, 
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image,
 					x * TILE_SIZE, y * TILE_SIZE);
 			}
 			x++;

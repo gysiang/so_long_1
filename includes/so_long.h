@@ -39,14 +39,21 @@ typedef	struct	s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*char_image;
+	void	*exit_image;
+	void	*border_image;
+	void	*coin_image;
+	void	*floor_image;
 	char	**map;
-	int	width;
-	int	height;
+	int	map_width;
+	int	map_height;
 	int	coins;
 	int	exit_x;
 	int	exit_y;
-	int	player_x;
-	int	player_y;
+	int	move_count;
+	int	prev_x;
+	int	prev_y;
+	int	curr_x;
+	int	curr_y;
 }		t_data;
 
 int	ft_strcmp(const char *s1, const char *s2);
@@ -56,10 +63,14 @@ int	on_destroy(t_data *data);
 int	checkBorder(char **map);
 int	checkRectangle(char **map);
 int	checkValidMap(t_data *data);
+int	moveup_test(t_data *data);
+int	movedown_test(t_data *data);
+int moveright_test(t_data *data);
+int moveleft_test(t_data *data);
 void	open_map(const char *filename, char **array);
-void	render_map(t_data *data);
+void	ft_render_map_after_move(t_data *data);
 void	*load_image(char c, void *mlx_ptr);
-void	redraw_character(t_data *data, int new_x, int new_y);
+void	render_map(t_data *data);
 t_data	*init_t_data();
 
 #endif
