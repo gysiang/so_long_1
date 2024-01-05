@@ -34,6 +34,8 @@ SRC_FILES 		= $(addprefix $(SRC_DIR)/, \
     				map_utils.c \
     				load_images.c \
     				so_long.c \
+					test_movement.c \
+					movement.c	\
     				gnl/get_next_line.c)
 
 # Object files
@@ -46,11 +48,11 @@ all: 		$(NAME)
 
 $(NAME):	$(OBJS) libs
 			$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
-		
+
 $(OBJS): 	$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	 	@mkdir -p $(@D)
 	 	@$(CC) -g $(CFLAGS) $(INCLUDES) -c $< -o $@
-	 
+
 libs: 			$(LIBFT_TARGET) $(PRINTF_TARGET) $(MLX_TARGET)
 
 $(LIBFT_TARGET):	make -C $(LIBFT_DIR)

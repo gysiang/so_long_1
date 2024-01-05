@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/05 12:27:47 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:49:25 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	checkValidMap(t_data *data)
 		}
 		y++;
 	}
+	ft_printf("curr_y: %d\n", data->curr_y);
+	ft_printf("curr_x: %d\n", data->curr_x);
 	data->map_width = x * TILE_SIZE;
 	data->map_height = y * TILE_SIZE;
 	if (player == 1 && map_exit == 1 && data->coins >= 1

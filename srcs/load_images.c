@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:31:53 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/05 12:39:57 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:10:16 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	*load_image(char c, void *mlx_ptr)
 	int		height;
 	int		width;
 
+	/**
 	if (c == '0')
 		image_path = FLOOR_XPM;
+	**/
 	if (c == '1')
 		image_path = BORDER_XPM;
 	if (c == 'C')
@@ -47,9 +49,23 @@ int	on_keypress(KeySym keysym, t_data *data)
 		on_destroy(data);
 	if (keysym == XK_Up)
 	{
-		ft_printf("curr_x: %d\n", data->curr_x);
-		ft_printf("curr_y: %d\n", data->curr_y);
-		ft_printf("moves: %d\n", data->move_count);
+		if (moveup_test(data) == 0)
+			move_up(data);
+	}
+	if (keysym == XK_Down)
+	{
+		if (movedown_test(data) == 0)
+			move_down(data);
+	}
+	if (keysym == XK_Left)
+	{
+		if (moveleft_test(data) == 0)
+			move_left(data);
+	}
+	if (keysym == XK_Right)
+	{
+		if (moveright_test(data) == 0)
+			move_right(data);
 	}
 	return (0);
 }

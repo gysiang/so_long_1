@@ -47,6 +47,7 @@ typedef	struct	s_data
 	int	map_width;
 	int	map_height;
 	int	coins;
+	int coins_collected;
 	int	exit_x;
 	int	exit_y;
 	int	move_count;
@@ -67,6 +68,10 @@ int	moveup_test(t_data *data);
 int	movedown_test(t_data *data);
 int moveright_test(t_data *data);
 int moveleft_test(t_data *data);
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_right(t_data *data);
+void	move_left(t_data *data);
 void	open_map(const char *filename, char **array);
 void	ft_render_map_after_move(t_data *data);
 void	*load_image(char c, void *mlx_ptr);
