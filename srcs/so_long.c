@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:52:24 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/05 12:41:26 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:16:29 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,15 @@ t_data	*init_t_data()
 	data->map_width = 0;
 	data->map_height = 0;
 	data->coins = 0;
+	data->coins_collected = 0;
 	data->exit_x = 0;
 	data->exit_y = 0;
 	data->prev_x = 0;
 	data->prev_y = 0;
 	data->curr_x = 0;
 	data->curr_y = 0;
+	data->tr = 0;
+	data->td = 0;
 	data->move_count = 1;
 	data->map = malloc(sizeof(char *) * (MAX_ROWS + 1));
 	return (data);

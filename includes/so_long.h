@@ -55,6 +55,8 @@ typedef	struct	s_data
 	int	prev_y;
 	int	curr_x;
 	int	curr_y;
+	int	tr;
+	int td;
 }		t_data;
 
 int	ft_strcmp(const char *s1, const char *s2);
