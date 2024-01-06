@@ -31,6 +31,7 @@ LIBS			= -L$(LIBFT_DIR) -lft \
 # Source files
 SRC_FILES 		= $(addprefix $(SRC_DIR)/, \
     				main.c \
+					checks.c  \
     				map_utils.c \
     				load_images.c \
     				so_long.c \

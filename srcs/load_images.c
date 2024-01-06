@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:31:53 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 10:45:23 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:45:54 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,29 @@
 void	*load_image(char c, void *mlx_ptr)
 {
 	char	*image_path;
+	void	*image;
 	int		height;
 	int		width;
 
-	/**
-	if (c == '0')
-		image_path = FLOOR_XPM;
-	**/
 	if (c == '1')
 		image_path = BORDER_XPM;
-	if (c == 'C')
+	else if (c == 'C')
 		image_path = COIN_XPM;
-	if (c == 'E')
+	else if (c == 'E')
 		image_path = EXIT_XPM;
-	if (c == 'P')
+	else if (c == 'P')
 		image_path = CHAR_XPM;
-	return (mlx_xpm_file_to_image(mlx_ptr, image_path, &width, &height));
+	image = mlx_xpm_file_to_image(mlx_ptr, image_path, &width, &height);
+	if (!image)
+		ft_putstr_fd("Error loading image\n", 2);
+	return (image);
 }
 
 void	ft_render_map_after_move(t_data *data)
 {
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	render_map(data);
+	shows_moves(data);
 }
 
 int	on_keypress(KeySym keysym, t_data *data)

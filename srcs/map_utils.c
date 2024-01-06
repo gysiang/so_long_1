@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 10:45:38 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:06:04 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,90 +35,38 @@ void	open_map(const char *filename, char **array)
 	close(fd);
 }
 
-int	checkBorder(char **map)
+int		check_allcoinscollected(t_data *data)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (map[y] != NULL)
-		y++;
-	while (map[0][x] != '\n')
-	{
-		if (map[0][x] != '1' || map[y-1][x] != '1')
-			return (0);
-		x++;
-	}
-	x = 0;
-	while (map[x])
-	{
-		if (map[0][x] != '1' || map[y-1][x] != '1')
-			return (0);
-		x++;
-	}
-	return (1);
-}
-
-int	checkRectangle(char **map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (map[y] != NULL)
-		y++;
-	while (map[0][x] != '\n')
-		x++;
-	if (x > y)
+	if (data->total_coins == data->coins_collected)
 		return (1);
 	return (0);
 }
 
-int	checkValidMap(t_data *data)
+void	shows_moves(t_data *data)
 {
-	int	x;
-	int y;
-	int	player;
-	int	map_exit;
+	char *moves_str;
+	char *coins_str;
 
-	map_exit = 0;
-	player = 0;
-	y = 0;
-	while (data->map[y] != NULL)
-	{
-		x = 0;
-		while (data->map[y][x] != '\n')
-		{
-			if (data->map[y][x] == 'C')
-				data->coins++;
-			if (data->map[y][x] == 'E')
-			{
-				map_exit++;
-				data->exit_x = x;
-				data->exit_y = y;
-			}
-			if (data->map[y][x] == 'P')
-			{
-				player++;
-				data->curr_x = x;
-				data->curr_y = y;
-			}
-			x++;
-		}
-		y++;
-	}
-	ft_printf("curr_y: %d\n", data->curr_y);
-	ft_printf("curr_x: %d\n", data->curr_x);
-	data->tr = x-1;
-	data->td = y-1;
-	data->map_width = x * TILE_SIZE;
-	data->map_height = y * TILE_SIZE;
-	if (player == 1 && map_exit == 1 && data->coins >= 1
-			&& checkRectangle(data->map) == 1
-			&& checkBorder(data->map) == 1)
-		return (1);
-	return (0);
+	moves_str = ft_itoa(data->move_count);
+	coins_str = ft_itoa(data->coins_collected);
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+	 21, 21, 0x000000, "No of moves : ");
+    mlx_string_put(data->mlx_ptr, data->win_ptr,
+	 221, 21, 0x000000, moves_str);
+    mlx_string_put(data->mlx_ptr, data->win_ptr,
+	 21, 41, 0x000000, "No of coins : ");
+    mlx_string_put(data->mlx_ptr, data->win_ptr,
+	 221, 41, 0x000000, coins_str);
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+		20, 20, 0xFFFFFF, "No of moves: ");
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+		220, 20, 0xFFFFFF, moves_str);
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+		20, 40, 0xFFFFFF, "No of coins : ");
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+		220, 40, 0xFFFFFF, coins_str);
+	free(moves_str);
+	free(coins_str);
 }
 
 void	render_map(t_data *data)

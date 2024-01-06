@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:37:08 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 10:52:44 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/06 14:14:45 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_game(t_data *data)
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->map_width,
 		data->map_height, "So Long - 42 Game");
 	render_map(data);
+	shows_moves(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, on_keypress, data);
 	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
