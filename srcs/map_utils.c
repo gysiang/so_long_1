@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/05 17:12:26 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/06 10:45:38 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	open_map(const char *filename, char **array)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		array[i] = ft_strdup(line);
-		printf("%s", array[i]);
+		ft_printf("%s", array[i]);
 		free(line);
 		i++;
 	}
@@ -112,8 +112,6 @@ int	checkValidMap(t_data *data)
 	ft_printf("curr_x: %d\n", data->curr_x);
 	data->tr = x-1;
 	data->td = y-1;
-	ft_printf("tr: %d\n", data->tr);
-	ft_printf("td: %d\n", data->td);
 	data->map_width = x * TILE_SIZE;
 	data->map_height = y * TILE_SIZE;
 	if (player == 1 && map_exit == 1 && data->coins >= 1
@@ -126,9 +124,10 @@ int	checkValidMap(t_data *data)
 void	render_map(t_data *data)
 {
 	int	x;
-	int	y = 0;
+	int	y;
 	void	*image;
 
+	y = 0;
 	while (data->map[y] != NULL)
 	{
 		x = 0;

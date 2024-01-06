@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:31:53 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/05 16:34:40 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/06 10:45:23 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,17 @@ int	on_keypress(KeySym keysym, t_data *data)
 	if (keysym == XK_Escape)
 		on_destroy(data);
 	if (keysym == XK_Up)
-	{
 		if (moveup_test(data) == 0)
 			move_up(data);
-	}
 	if (keysym == XK_Down)
-	{
 		if (movedown_test(data) == 0)
 			move_down(data);
-	}
 	if (keysym == XK_Left)
-	{
 		if (moveleft_test(data) == 0)
 			move_left(data);
-	}
 	if (keysym == XK_Right)
-	{
 		if (moveright_test(data) == 0)
 			move_right(data);
-	}
 	return (0);
 }
 
