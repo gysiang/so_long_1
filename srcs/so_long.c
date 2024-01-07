@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:52:24 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 16:03:29 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:37:35 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,22 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
+void	free_map(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i <= MAX_ROWS)
+	{
+		free(data->map[i]);
+		i++;
+	}
+	free(data->map);
+}
+
 t_data	*init_t_data()
 {
+	//int	i;
 	t_data	*data = malloc(sizeof(t_data));
 	if (data == NULL)
 	{
@@ -53,13 +67,18 @@ t_data	*init_t_data()
 	data->coins_collected = 0;
 	data->exit_count = 0;
 	data->player_count = 0;
-	data->prev_x = 0;
-	data->prev_y = 0;
+	// data->prev_x = 0;
+	// data->prev_y = 0;
 	data->curr_x = 0;
 	data->curr_y = 0;
 	data->tr = 0;
 	data->td = 0;
 	data->move_count = 0;
-	data->map = (char **)malloc(sizeof(char *) * (MAX_ROWS + 1));
+	//data->map = ft_split(get_next_line(fd), '\n');
+	data->map = malloc(sizeof(char *) * (MAX_ROWS + 1));
+	// for (int i = 0; i <= MAX_ROWS; i++) {
+	// 	data->map[i] = malloc(sizeof(char) * (MAX_COLS + 1));
+	// 	// Initialize the memory as needed
+	// }
 	return (data);
 }

@@ -26,7 +26,8 @@
 # include "get_next_line.h"
 
 # define TILE_SIZE			50
-# define MAX_ROWS			10
+# define MAX_ROWS			15
+# define MAX_COLS			15
 
 # define BORDER_XPM			"assets/sprites/tree.xpm"
 # define CHAR_XPM			"assets/sprites/front_character.xpm"
@@ -78,6 +79,8 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_right(t_data *data);
 void	move_left(t_data *data);
+void	free_map(t_data *data);
+//int	open_map(const char *filename);
 void	open_map(const char *filename, char **array);
 void	ft_render_map_after_move(t_data *data);
 void	*load_image(char c, void *mlx_ptr);

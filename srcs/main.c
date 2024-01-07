@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:37:08 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 14:14:45 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:38:04 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_game(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	*data;
+	//int	fd;
 
 	if (ac == 2)
 	{
@@ -34,6 +35,13 @@ int	main(int ac, char **av)
 			perror("This filetype is not .ber");
 			exit(EXIT_FAILURE);
 		}
+		// data = malloc(sizeof(t_data));
+		// if (data == NULL)
+		// {
+		// 	perror("Failed to allocate memory for t_data");
+		// 	exit(EXIT_FAILURE);
+		// }
+		//fd = open_map(av[1]);
 		data = init_t_data();
 		open_map(av[1], data->map);
 		if (checkValidMap(data) == 0)

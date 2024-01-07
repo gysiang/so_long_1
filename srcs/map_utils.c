@@ -6,12 +6,14 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 15:06:04 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:36:28 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+/**
+void	open_map(const char *filename, char **array)
+**/
 void	open_map(const char *filename, char **array)
 {
 	int		fd;
@@ -25,6 +27,7 @@ void	open_map(const char *filename, char **array)
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
+	//return (fd);
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		array[i] = ft_strdup(line);
@@ -35,7 +38,7 @@ void	open_map(const char *filename, char **array)
 	close(fd);
 }
 
-int		check_allcoinscollected(t_data *data)
+int	check_allcoinscollected(t_data *data)
 {
 	if (data->total_coins == data->coins_collected)
 		return (1);

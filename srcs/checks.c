@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:50:04 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 15:52:53 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:34:42 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	allocate_mapvalues(t_data *data)
 	while (data->map[y] != NULL)
 	{
 		x = 0;
-		while (data->map[y][x] != '\n')
+		while (data->map[y][x] != '\0')
 		{
 			x++;
 		}

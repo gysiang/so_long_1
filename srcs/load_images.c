@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:31:53 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/06 15:45:54 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/07 13:34:32 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	*load_image(char c, void *mlx_ptr)
 	int		height;
 	int		width;
 
-	if (c == '1')
+	if (c == '0')
+		return (NULL);
+	else if (c == '1')
 		image_path = BORDER_XPM;
 	else if (c == 'C')
 		image_path = COIN_XPM;
@@ -66,5 +68,6 @@ int	on_keypress(KeySym keysym, t_data *data)
 int	on_destroy(t_data *data)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	//free_map(data);
 	exit(0);
 }
