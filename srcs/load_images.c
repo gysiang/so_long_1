@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:31:53 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/07 13:34:32 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:57:12 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	*load_image(char c, void *mlx_ptr)
 	else if (c == 'P')
 		image_path = CHAR_XPM;
 	image = mlx_xpm_file_to_image(mlx_ptr, image_path, &width, &height);
-	if (!image)
-		ft_putstr_fd("Error loading image\n", 2);
 	return (image);
 }
 
@@ -68,6 +66,6 @@ int	on_keypress(KeySym keysym, t_data *data)
 int	on_destroy(t_data *data)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	//free_map(data);
+	free_map(data);
 	exit(0);
 }

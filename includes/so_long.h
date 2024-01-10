@@ -82,6 +82,7 @@ void	move_left(t_data *data);
 void	free_map(t_data *data);
 //int	open_map(const char *filename);
 void	open_map(const char *filename, char **array);
+char	**allocate_map(int fd);
 void	ft_render_map_after_move(t_data *data);
 void	*load_image(char c, void *mlx_ptr);
 void	render_map(t_data *data);

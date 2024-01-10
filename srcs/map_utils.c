@@ -6,14 +6,35 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/07 14:36:28 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:07:10 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-/**
-void	open_map(const char *filename, char **array)
-**/
+
+char	**allocate_map(int fd)
+{
+    char *line;
+    char *temp = NULL;
+    char **array = NULL;
+	int	i;
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+		temp = ft_strjoin(temp, line);
+		free(line);
+    }
+	array = ft_split(temp, '\n');
+	i = 0;
+    while (array[i] != NULL)
+    {
+        ft_printf("Line %d: %s\n", i + 1, array[i]);
+		i++;
+    }
+	free(temp);
+    return (array);
+}
+
 void	open_map(const char *filename, char **array)
 {
 	int		fd;
@@ -27,7 +48,6 @@ void	open_map(const char *filename, char **array)
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
-	//return (fd);
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		array[i] = ft_strdup(line);
