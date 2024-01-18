@@ -56,11 +56,17 @@ $(OBJS): 	$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 libs: 			$(LIBFT_TARGET) $(PRINTF_TARGET) $(MLX_TARGET)
 
-$(LIBFT_TARGET):	make -C $(LIBFT_DIR)
+$(LIBFT_TARGET):	
+	@echo "Building libft..."
+	@make -C $(LIBFT_DIR)
 
-$(PRINTF_TARGET):	make -C $(PRINTF_DIR)
+$(PRINTF_TARGET):	
+	@echo "Building ft_printf.."
+	@make -C $(PRINTF_DIR)
 
-$(MLX_TARGET):		make -C $(MLX_DIR)
+$(MLX_TARGET):		
+	@echo "Building mlx.."
+	@make -C $(MLX_DIR)
 
 clean:
 	rm -f $(OBJ_FILES)
