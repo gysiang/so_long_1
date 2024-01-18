@@ -66,7 +66,7 @@ $(PRINTF_TARGET):
 
 $(MLX_TARGET):		
 	@echo "Building mlx.."
-	@make -C $(MLX_DIR)
+	@make -C $(MLX_DIR) && ./configure
 
 clean:
 	rm -f $(OBJ_FILES)
