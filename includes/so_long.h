@@ -20,10 +20,10 @@
 # include <X11/keysym.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "libft.h"
-# include "ft_printf.h"
-# include "mlx.h"
-# include "get_next_line.h"
+# include "../libft/libft.h"
+# include "../printf/ft_printf.h"
+# include "../mlx/mlx.h"
+# include "../srcs/gnl/get_next_line.h"
 
 # define TILE_SIZE			50
 # define MAX_ROWS			15

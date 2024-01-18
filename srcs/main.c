@@ -6,11 +6,11 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:37:08 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/10 18:59:00 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:01:53 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	init_game(t_data *data)
 {
@@ -45,10 +45,13 @@ int	main(int ac, char **av)
 		if (checkValidMap(data) == 0)
 		{
 			perror("This is not a valid map");
+			free(data);
 			exit(EXIT_FAILURE);
 		}
 		init_game(data);
 	}
+	else
+		ft_printf("./solong map.ber");
 	return (0);
 }
 

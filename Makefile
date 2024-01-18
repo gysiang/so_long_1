@@ -1,31 +1,30 @@
+LIBFT_PATH		= libft
+LIBFT			= $(LIBFT_PATH)/libft.a
+
+MLX_PATH		= mlx
+MLX				= $(MLX_PATH)/libmlx.a
+
+PRINTF_PATH		= printf
+PRINTF			= $(PRINTF_PATH)/libftprintf.a
+
 # Compiler and flags
 CC			= gcc
 CFLAGS 			= -Wall -Wextra -Werror
-MLX_FLAG		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lbsd -lm
+MLXFLAGS		= -L$(MLX_PATH) -lmlx -lXext -lX11 -lbsd -lm
 
 # Directories
-LIBFT_DIR		= libft
-PRINTF_DIR		= printf
-MLX_DIR			= mlx
-INCLUDES_DIR 		= includes
+INCLUDES_DIR	= includes
 BUILD_DIR 		= build
 GNL_DIR			= gnl
 SRC_DIR			= srcs
+HEADER			= $(INCLUDES_DIR)/so_long.h
 
-VALGRIND		= @valgrind --leak-check=full --show-leak-kinds=all \
-				--track-origins=yes --quiet --tool=memcheck --keep-debuginfo=yes
-
-INCLUDES 		= -I$(INCLUDES_DIR) \
-          			-I$(LIBFT_DIR) \
-           			-I$(PRINTF_DIR) \
-          			-I$(MLX_DIR) \
-         			-I$(SRC_DIR)/$(GNL_DIR)
 # Library files
 
-LIBS			= -L$(LIBFT_DIR) -lft \
-				-L$(PRINTF_DIR) -lftprintf \
-				-L$(MLX_DIR)	\
-				$(MLX_FLAG)	\
+LIBS			= -L$(LIBFT_PATH) -lft \
+				-L$(PRINTF_PATH) -lftprintf \
+				-L$(MLX_PATH)	\
+				$(MLXFLAGS)	\
 				-L/usr/lib
 
 # Source files
@@ -39,46 +38,38 @@ SRC_FILES 		= $(addprefix $(SRC_DIR)/, \
 					movement.c	\
     				gnl/get_next_line.c)
 
-# Object files
-OBJS			= $(SRC_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-
 NAME			= so_long
+
+$(LIBFT):
+	@echo "Building libft..."
+	@make -C $(LIBFT_PATH)
+
+$(PRINTF):
+	@echo "Building ft_printf.."
+	@make -C $(PRINTF_PATH)
+
+$(MLX):
+	@echo "Building mlx.."
+	@make -C $(MLX_PATH)
+
+OBJECTS			= $(SRC_FILES:.c=.o)
 
 # Targets
 all: 		$(NAME)
 
-$(NAME):	$(OBJS) libs
-			$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
-
-$(OBJS): 	$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	 	@mkdir -p $(@D)
-	 	@$(CC) -g $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-libs: 			$(LIBFT_TARGET) $(PRINTF_TARGET) $(MLX_TARGET)
-
-$(LIBFT_TARGET):	
-	@echo "Building libft..."
-	@make -C $(LIBFT_DIR)
-
-$(PRINTF_TARGET):	
-	@echo "Building ft_printf.."
-	@make -C $(PRINTF_DIR)
-
-$(MLX_TARGET):		
-	@echo "Building mlx.."
-	@make -C $(MLX_DIR) && ./configure
+$(NAME): $(LIBFT) $(PRINTF) $(MLX) $(INCLUDES) $(OBJECTS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJECTS) $(LIBS) -o $(NAME)
 
 clean:
-	rm -f $(OBJ_FILES)
-	make -C $(LIBFT_DIR) clean
-	make -C $(PRINTF_DIR) clean
-	make -C $(MLX_DIR) clean
+	make -C $(LIBFT_PATH) clean
+	make -C $(PRINTF_PATH) clean
+	make -C $(MLX_PATH) clean
+	rm -f $(OBJECTS)
 
 fclean: clean
+	make -C $(LIBFT_PATH) fclean
+	make -C $(PRINTF_PATH) fclean
 	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
-	make -C $(PRINTF_DIR) fclean
-	make -C $(MLX_DIR) fclean
 
 re: fclean all
 

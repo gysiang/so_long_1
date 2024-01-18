@@ -6,11 +6,12 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:50:04 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/07 14:34:42 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:59:51 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
+
 
 int	checkBorder(char **map)
 {
