@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:52:24 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/10 19:15:56 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:21:15 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,16 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void	free_map(t_data *data)
+void	init_t_data(t_data *data)
 {
-	int	i;
-
-    if (data->char_image != NULL)
-	{
-        free(data->char_image);
-	}
-    if (data->border_image != NULL)
-	{
-        free(data->border_image);
-	}
-    if (data->coin_image != NULL)
-	{
-        free(data->coin_image);
-	}
-    if (data->exit_image != NULL)
-	{
-        free(data->exit_image);
-	}
-	i = 0;
-	while (data->map[i] != NULL)
-	{
-		free(data->map[i]);
-		i++;
-	}
-	free(data->map);
-}
-
-t_data	*init_t_data(t_data *data)
-{
-	data->mlx_ptr = mlx_init();
+	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
-	data->char_image = load_image('P', data->mlx_ptr);
-	data->exit_image = load_image('E', data->mlx_ptr);
-	data->border_image = load_image('1', data->mlx_ptr);
-	data->coin_image = load_image('C', data->mlx_ptr);
-	data->floor_image = load_image('0', data->mlx_ptr);
+	data->char_image = NULL;
+	data->exit_image = NULL;
+	data->border_image = NULL;
+	data->coin_image = NULL;
+	data->floor_image = NULL;
+	data->map = NULL;
 	data->map_width = 0;
 	data->map_height = 0;
 	data->total_coins = 0;
@@ -81,6 +53,4 @@ t_data	*init_t_data(t_data *data)
 	data->tr = 0;
 	data->td = 0;
 	data->move_count = 0;
-	data->map = malloc(sizeof(char *) * (MAX_ROWS + 1));
-	return (data);
 }

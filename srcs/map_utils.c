@@ -6,56 +6,38 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/10 19:07:10 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/19 15:01:11 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-char	**allocate_map(int fd)
-{
-    char *line;
-    char *temp = NULL;
-    char **array = NULL;
-	int	i;
-
-    while ((line = get_next_line(fd)) != NULL)
-    {
-		temp = ft_strjoin(temp, line);
-		free(line);
-    }
-	array = ft_split(temp, '\n');
-	i = 0;
-    while (array[i] != NULL)
-    {
-        ft_printf("Line %d: %s\n", i + 1, array[i]);
-		i++;
-    }
-	free(temp);
-    return (array);
-}
-
-void	open_map(const char *filename, char **array)
+char	**allocate_map(char *filename)
 {
 	int		fd;
-	int		i;
 	char	*line;
+	char	*holder_map;
+	char	*holder;
+	char	**map;
 
-	i = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
+		return (NULL);
+	holder_map = ft_strdup("");
+	while (1)
 	{
-		perror("Error opening file");
-		exit(EXIT_FAILURE);
-	}
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		array[i] = ft_strdup(line);
-		ft_printf("%s", array[i]);
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		holder = holder_map;
+		holder_map = ft_strjoin(holder, line);
 		free(line);
-		i++;
+		free(holder);
 	}
+	map = ft_split(holder_map, '\n');
+	free(holder_map);
 	close(fd);
+	return (map);
 }
 
 int	check_allcoinscollected(t_data *data)
@@ -92,26 +74,33 @@ void	shows_moves(t_data *data)
 	free(coins_str);
 }
 
+void	img_draw(t_data *data, void *image, int x, int y)
+{
+	mlx_put_image_to_window
+		(data->mlx_ptr, data->win_ptr, image, x * TILE_SIZE, y * TILE_SIZE);
+}
+
 void	render_map(t_data *data)
 {
 	int	x;
 	int	y;
-	void	*image;
 
 	y = 0;
-	while (data->map[y] != NULL)
+	while (data->map[y])
 	{
 		x = 0;
-		while (data->map[y][x] != '\n')
+		while (data->map[y][x])
 		{
-			image = load_image(data->map[y][x], data->mlx_ptr);
-			if (data->map[y][x] == 'P')
-				data->char_image = image;
-			if (image != NULL)
-			{
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, image,
-					x * TILE_SIZE, y * TILE_SIZE);
-			}
+			if (data->map[y][x] == '1')
+				img_draw(data, data->border_image, x, y);
+			else if (data->map[y][x] == '0')
+				img_draw(data, data->floor_image, x, y);
+			else if (data->map[y][x] == 'P')
+				img_draw(data, data->char_image, x, y);
+			else if (data->map[y][x] == 'C')
+				img_draw(data, data->coin_image, x, y);
+			else if (data->map[y][x] == 'E')
+				img_draw(data, data->exit_image, x, y);
 			x++;
 		}
 		y++;

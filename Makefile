@@ -36,6 +36,8 @@ SRC_FILES 		= $(addprefix $(SRC_DIR)/, \
     				so_long.c \
 					test_movement.c \
 					movement.c	\
+					errors.c \
+					free.c \
     				gnl/get_next_line.c)
 
 NAME			= so_long

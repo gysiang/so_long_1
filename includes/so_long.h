@@ -79,13 +79,16 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_right(t_data *data);
 void	move_left(t_data *data);
-void	free_map(t_data *data);
-//int	open_map(const char *filename);
-void	open_map(const char *filename, char **array);
-char	**allocate_map(int fd);
+char	**allocate_map(char *filename);
 void	ft_render_map_after_move(t_data *data);
 void	*load_image(char c, void *mlx_ptr);
+void	free_img(t_data *data);
+void	free_map(char **map);
+void	init_image(t_data *data);
 void	render_map(t_data *data);
-t_data	*init_t_data();
+void	init_t_data(t_data *data);
+void	error_type(int c);
+void	img_draw(t_data *data, void *image, int x, int y);
+void	print_map(char **map);
 
 #endif

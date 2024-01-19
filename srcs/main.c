@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:37:08 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/18 14:01:53 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/19 15:02:37 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,31 @@
 
 void	init_game(t_data *data)
 {
+	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->map_width,
 		data->map_height, "So Long - 42 Game");
+	init_image(data);
 	render_map(data);
 	shows_moves(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, on_keypress, data);
 	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
+}
+
+void print_map(char **map)
+{
+    int y = 0;
+    while (map[y] != NULL)
+    {
+        int x = 0;
+        while (map[y][x] != '\0')
+        {
+            putchar(map[y][x]);
+            x++;
+        }
+        putchar('\n');
+        y++;
+    }
 }
 
 int	main(int ac, char **av)
@@ -29,29 +47,26 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		if (checkfiletype(av[1]) == 0)
-		{
-			perror("This filetype is not .ber");
-			exit(EXIT_FAILURE);
-		}
-		data = malloc(sizeof(t_data));
-		if (data == NULL)
-		{
-			perror("Failed to allocate memory for t_data");
-			exit(EXIT_FAILURE);
-		}
+		data = malloc(sizeof(*data));
+		if (!data)
+			error_type(7);
 		init_t_data(data);
-		open_map(av[1], data->map);
-		if (checkValidMap(data) == 0)
+		data->map = allocate_map(av[1]);
+		print_map(data->map);
+		if (checkfiletype(av[1]) && checkValidMap(data))
+			init_game(data);
+		else
 		{
-			perror("This is not a valid map");
+			if (data->map)
+				free_map(data->map);
 			free(data);
-			exit(EXIT_FAILURE);
+			error_type(14);
 		}
-		init_game(data);
 	}
 	else
-		ft_printf("./solong map.ber");
+	{
+		ft_putstr_fd("File Type must be .ber", 2);
+		exit(EXIT_FAILURE);
+	}
 	return (0);
 }
-
