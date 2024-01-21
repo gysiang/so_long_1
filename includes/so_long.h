@@ -35,7 +35,7 @@
 # define COIN_XPM			"assets/sprites/pokeball.xpm"
 # define EXIT_XPM			"assets/sprites/door.xpm"
 
-typedef	struct	s_data
+typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -45,36 +45,38 @@ typedef	struct	s_data
 	void	*coin_image;
 	void	*floor_image;
 	char	**map;
-	int	map_width;
-	int	map_height;
-	int	total_coins;
-	int coins_collected;
-	int	move_count;
-	int	exit_count;
-	int player_count;
-	int	exit_x;
-	int	exit_y;
-	int	curr_x;
-	int	curr_y;
-	int	tr;
-	int td;
+	int		map_width;
+	int		map_height;
+	int		total_coins;
+	int		coins_collected;
+	int		move_count;
+	int		exit_count;
+	int		player_count;
+	int		exit_x;
+	int		exit_y;
+	int		curr_x;
+	int		curr_y;
+	int		tr;
+	int		td;
 }		t_data;
 
-int	ft_strcmp(const char *s1, const char *s2);
-int	checkfiletype(const char *filename);
-int	on_keypress(KeySym keysym, t_data *data);
-int	on_destroy(t_data *data);
-int	checkborder(char **map);
-int	checkrectangle(char **map);
-int	checkvalidmap(t_data *data);
-int	check_allcoinscollected(t_data *data);
-int	moveup_test(t_data *data);
-int	movedown_test(t_data *data);
-int moveright_test(t_data *data);
-int moveleft_test(t_data *data);
-int	is_validated(char **map);
-int	valid_path(t_data *data);
-int	validmove(t_data *data, char **array, int row, int col);
+int		ft_strcmp(const char *s1, const char *s2);
+int		checkfiletype(const char *filename);
+int		on_keypress(KeySym keysym, t_data *data);
+int		on_destroy(t_data *data);
+int		checkborder(char **map);
+int		checkrectangle(char **map);
+int		checkvalidmap(t_data *data);
+int		check_allcoinscollected(t_data *data);
+int		moveup_test(t_data *data);
+int		movedown_test(t_data *data);
+int		moveright_test(t_data *data);
+int		moveleft_test(t_data *data);
+int		is_validated(char **map);
+int		valid_path(t_data *data);
+int		validmove(t_data *data, char **array, int row, int col);
+char	**create_array(int rows, int cols);
+char	**allocate_map(char *filename);
 void	allocate_gamevalues(t_data *data);
 void	allocate_mapvalues(t_data *data);
 void	allocate_exitvalues(t_data *data);
@@ -83,11 +85,10 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_right(t_data *data);
 void	move_left(t_data *data);
-char	**allocate_map(char *filename);
 void	ft_render_map_after_move(t_data *data);
 void	*load_image(char c, void *mlx_ptr);
 void	free_img(t_data *data);
-void 	free_array(char **array, int rows);
+void	free_array(char **array, int rows);
 void	free_map(char **map);
 void	init_image(t_data *data);
 void	render_map(t_data *data);
@@ -95,7 +96,6 @@ void	init_t_data(t_data *data);
 void	error_type(int c);
 void	img_draw(t_data *data, void *image, int x, int y);
 void	print_map(char **map);
-char	**create_array(int rows, int cols);
 void	floodfill(t_data *data, int row, int col, char **array);
 
 #endif
