@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:29:07 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/19 15:01:11 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:52:55 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ int	check_allcoinscollected(t_data *data)
 
 void	shows_moves(t_data *data)
 {
-	char *moves_str;
-	char *coins_str;
+	char	*moves_str;
+	char	*coins_str;
 
 	moves_str = ft_itoa(data->move_count);
 	coins_str = ft_itoa(data->coins_collected);
 	mlx_string_put(data->mlx_ptr, data->win_ptr,
-	 21, 21, 0x000000, "No of moves : ");
-    mlx_string_put(data->mlx_ptr, data->win_ptr,
-	 221, 21, 0x000000, moves_str);
-    mlx_string_put(data->mlx_ptr, data->win_ptr,
-	 21, 41, 0x000000, "No of coins : ");
-    mlx_string_put(data->mlx_ptr, data->win_ptr,
-	 221, 41, 0x000000, coins_str);
+		21, 21, 0x000000, "No of moves : ");
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+		221, 21, 0x000000, moves_str);
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+		21, 41, 0x000000, "No of coins : ");
+	mlx_string_put(data->mlx_ptr, data->win_ptr,
+		221, 41, 0x000000, coins_str);
 	mlx_string_put(data->mlx_ptr, data->win_ptr,
 		20, 20, 0xFFFFFF, "No of moves: ");
 	mlx_string_put(data->mlx_ptr, data->win_ptr,

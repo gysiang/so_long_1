@@ -6,11 +6,32 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:52:24 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/19 12:21:15 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:49:23 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	allocate_mapvalues(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (data->map[y] != NULL)
+	{
+		x = 0;
+		while (data->map[y][x] != '\0')
+		{
+			x++;
+		}
+		y++;
+	}
+	data->tr = x -1;
+	data->td = y -1;
+	data->map_width = x * TILE_SIZE;
+	data->map_height = y * TILE_SIZE;
+}
 
 int	checkfiletype(const char *filename)
 {
@@ -24,7 +45,7 @@ int	checkfiletype(const char *filename)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
@@ -48,6 +69,8 @@ void	init_t_data(t_data *data)
 	data->coins_collected = 0;
 	data->exit_count = 0;
 	data->player_count = 0;
+	data->exit_x = 0;
+	data->exit_y = 0;
 	data->curr_x = 0;
 	data->curr_y = 0;
 	data->tr = 0;

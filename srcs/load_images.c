@@ -6,7 +6,7 @@
 /*   By: gyong-si <gyongsi@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:31:53 by gyong-si          #+#    #+#             */
-/*   Updated: 2024/01/19 15:11:08 by gyong-si         ###   ########.fr       */
+/*   Updated: 2024/01/21 23:00:49 by gyong-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ void	ft_render_map_after_move(t_data *data)
 
 int	on_keypress(KeySym keysym, t_data *data)
 {
-	char	*key;
-
-	key = XKeysymToString(keysym);
-	ft_printf("Pressed key: %s\n", key);
 	if (keysym == XK_Escape)
 		on_destroy(data);
 	if (keysym == XK_Up)
